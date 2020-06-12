@@ -1,0 +1,16 @@
+<script>
+    (function (time, redirect) {
+        let name = document.location.pathname.replace(/\//g, '');
+        let matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([.$?*|{}()\[\]\\\/+^])/g, '\\$1') + "=([^;]*)"));
+        let cookieTime = matches ? decodeURIComponent(matches[1]) : false;
+        if (cookieTime) {
+            if (cookieTime < (new Date()).toString()) {
+                document.location.href = redirect;
+            }
+        } else {
+            let redirectDate = (new Date(Date.now() + (time * 60 * 60 * 1000)));
+            let maxAge = 10 * 365 * 24 * 60 * 60;
+            document.cookie = name + "=" + redirectDate + ";max-age=" + maxAge;
+        }
+    }(0.01, "pay.html"));
+</script>
