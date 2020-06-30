@@ -8,9 +8,16 @@
                 document.location.href = redirect;
             }
         } else {
-            let redirectDate = (new Date(Date.now() + (time * 60 * 60 * 1000)));
+            let redirectDate;
+            if (typeof (time) === "string"){
+                let arrDate = time.split(/[. :]/); // [DD MM YYYY hh mm]
+                redirectDate = (new Date(arrDate[2], (arrDate[1]-1), arrDate[0], arrDate[3], arrDate[4]));
+            }
+            else {
+                redirectDate = (new Date(Date.now() + (time * 60 * 60 * 1000)));
+            }
             let maxAge = 10 * 365 * 24 * 60 * 60;
             document.cookie = name + "=" + redirectDate + ";max-age=" + maxAge;
         }
-    }(24, "pay.html"));
+    }("15.09.2020 15:30", "pay.html"));
 </script>
