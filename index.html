@@ -10,7 +10,7 @@
         } else {
             let redirectDate;
             if (typeof (time) === "string"){
-                let arrDate = time.split(/[. :]/); // [DD MM YYYY hh mm]
+                let arrDate = time.split(/[. :]/).map((e)=>parseInt(e)); // [DD MM YYYY hh mm]
                 redirectDate = (new Date(arrDate[2], (arrDate[1]-1), arrDate[0], arrDate[3], arrDate[4]));
             }
             else {
